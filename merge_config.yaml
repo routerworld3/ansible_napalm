@@ -1,0 +1,29 @@
+# replace_config setting is False for Merge Config:
+- name: PLAYBOOK 1 MERGE CONFIG 
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars_files:
+#   - lab_secret.yml( for Production use secret)
+    - lab.yml
+
+  tasks:
+    - name: Create File for Diff 
+      hosts: local
+      file: 
+        path: "./compiled/{{inventory_hostname}}.diff"
+        state: touch
+        
+    - name: Install Merge Config and save diff
+      napalm_install_config:
+        hostname: "{{ inventory_hostname}}"
+        provider : "{{ios_provider}}"
+        config_file: './compiled/base.conf'
+        commit_changes: True
+        replace_config: False
+        get_diffs: True
+        diff_file: './compiled/{{ inventory_hostname }}.diff'
+        
+   # Description: Directory Structure Needs complied directory where the Playbook is
+   # make sure hostname dns is resolvable.
+   # verify the base.conf on one of the device manually before using this Playbook.
