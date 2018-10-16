@@ -1,0 +1,22 @@
+---
+# Example to retrieve facts from a device:
+- name: Get facts from device
+  hosts: all
+  connection: local
+  gather_facts: no
+  vars_files:
+    - lab.yml
+
+  tasks:
+    - name: Get facts from device
+      napalm_get_facts:
+        hostname: "{{host}}"
+        provider: "{{ ios_provider }}"
+        filter: 'users'
+      register: result
+
+    - name: print data
+      debug: var=result
+      
+# Description get facts 
+# supported filters https://napalm.readthedocs.io/en/latest/support/
