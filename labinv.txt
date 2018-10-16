@@ -1,0 +1,14 @@
+[all:vars]
+#ansible_username=cisco
+#ansibel_password=cisco
+#username=cisco
+#password=cisco
+[RTR]
+R5 ansible_host=10.10.10.162 
+R6 ansible_host=10.10.10.163
+
+[SW]
+SW1 ansible_host=10.10.10.137
+SW2 ansible_host=10.10.10.156
+SW3 ansible_host=10.10.10.141
+SW4 ansible_host=10.10.10.159
