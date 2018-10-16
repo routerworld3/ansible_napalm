@@ -1,0 +1,7 @@
+---
+- ios_provider:
+    dev_os: ios
+    username: cisco
+    password: cisco
+# ios_provider dictionary is used in the playbook
+# in Production use encrypted username/password 
